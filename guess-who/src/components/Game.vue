@@ -124,6 +124,7 @@ export default {
   height: 100vh;
   background-color: var(--dark);
 }
+
 .heading {
   color: var(--blue-grey);
   font-weight: 600;
