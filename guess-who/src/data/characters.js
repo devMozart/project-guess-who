@@ -770,7 +770,7 @@ const characters = [
   {
     name: "Rell",
     img: "RiotX_ChampionList_rell.jpg",
-    hair: "blone",
+    hair: "blonde",
     homeRegion: "none",
     mainRole: "tank",
     accessories: ["weapon"],

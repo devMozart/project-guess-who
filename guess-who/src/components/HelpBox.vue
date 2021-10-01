@@ -1,15 +1,23 @@
 <template>
   <div class="helpbox">
+    <div class="helpbox__buttons">
+      <div class="helpbox__buttons__row">
+        <Button @click="onGiveClue">Give me a clue</Button>
+        <Button @click="onMakeItEasier">Make it easier</Button>
+      </div>
+      <Button @click="$emit('onNewChampion')">
+        Try another champion
+      </Button>
+    </div>
+    <h1 v-if="clueList.length > 0" class="fade-and-slide">
+      Your list of clues
+    </h1>
     <div
       v-for="(clue, index) in clueList"
       :key="index"
       class="helpbox__information"
     >
       <span>{{ clue.text }}</span>
-    </div>
-    <div class="helpbox__buttons">
-      <Button @click="onGiveClue">Give me a clue</Button>
-      <Button @click="onMakeItEasier">Make it easier</Button>
     </div>
   </div>
 </template>
@@ -125,21 +133,36 @@ export default {
 </script>
 
 <style scoped>
-/* .helpbox {
-  display: flex;
-} */
+.helpbox {
+  transition: all 2s ease-out;
+}
 .helpbox__information {
   display: grid;
   grid-template-columns: 1fr;
   text-align: left;
   color: var(--blue-grey);
   border: 1px solid var(--blue-grey);
-  margin: 1px 1px 12px 1px;
+  margin: 12px 1px 12px 1px;
   padding: 6px;
+
+  animation: fade-in 1s, slide-down 1s;
+  -webkit-animation: fade-in 1s, slide-down 1s;
+  -moz-animation: fade-in 1s, slide-down 1s;
+  -o-animation: fade-in 1s, slide-down 1s;
+  -ms-animation: fade-in 1s, slide-down 1s;
 }
 .helpbox__buttons {
   display: grid;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 12px;
+}
+.helpbox__buttons__row {
+  display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 24px;
+  column-gap: 12px;
+}
+
+.fade-and-slide {
+  animation: fade-in 1s, slide-down 1s;
 }
 </style>

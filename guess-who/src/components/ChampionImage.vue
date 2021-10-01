@@ -1,8 +1,10 @@
 <template>
-  <div class="image-container">
-    <img v-show="correct" :src="image" />
-    <canvas v-show="!correct" ref="canvas" width="360" height="400"></canvas>
-  </div>
+  <canvas
+    ref="canvas"
+    :class="{ 'fade-in': loading }"
+    width="364"
+    height="398"
+  ></canvas>
 </template>
 
 <script>
@@ -11,11 +13,11 @@ export default {
   props: {
     rank: { type: String, required: true },
     imgSrc: { type: String, required: true },
-    correct: { type: Boolean, required: true },
   },
   data() {
     return {
       img: new Image(),
+      loading: false,
     };
   },
   computed: {
@@ -24,27 +26,25 @@ export default {
     },
     difficulty() {
       if (this.rank === "challenger") {
-        return 2;
+        return 1;
       }
       if (this.rank === "diamond") {
-        return 6;
+        return 4;
       }
 
-      return 10;
+      return 8;
     },
   },
   mounted() {
-    document.onreadystatechange = () => {
-      if (document.readyState == "complete") {
-        this.setup();
-      }
-    };
+    this.load();
+    this.setup();
   },
   watch: {
     rank() {
       this.pixelate();
     },
     imgSrc() {
+      this.load();
       this.img.src = this.image;
       let canvas = this.$refs.canvas;
       let ctx = canvas.getContext("2d");
@@ -52,6 +52,10 @@ export default {
     },
   },
   methods: {
+    load() {
+      this.loading = true;
+      setTimeout(() => (this.loading = false), 500);
+    },
     setup() {
       let ctx = this.$refs.canvas.getContext("2d");
 
@@ -77,17 +81,7 @@ export default {
 </script>
 
 <style scoped>
-.image-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 400px;
-}
-.image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border: 1px solid var(--highlight-blue);
+.fade-in {
+  animation: fade-in 1s;
 }
 </style>

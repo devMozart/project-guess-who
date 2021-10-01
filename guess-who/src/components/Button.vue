@@ -11,6 +11,8 @@ export default {
 <style scoped>
 .button {
   cursor: pointer;
+  text-align: center;
+  width: 100%;
   background-color: var(--highlight-green);
   color: var(--blue-grey);
   padding: 12px 12px;

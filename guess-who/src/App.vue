@@ -37,7 +37,13 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--dark-grey);
+  background-color: var(--dark);
+}
+
+h1 {
+  color: var(--blue-grey);
+  margin: 12px 0;
+  font-size: 16px;
 }
 
 #app {
@@ -48,5 +54,104 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 641px) {
+  #app {
+    align-items: flex-start;
+    justify-content: left;
+    padding: 0 0 0 10%;
+  }
+
+  body {
+    background-color: var(--dark-grey);
+    background: url("./assets/background/background.png") no-repeat center
+      center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0, 0);
+  }
+  1.78571% {
+    transform: translate(5px, 0);
+  }
+  3.57143% {
+    transform: translate(0, 0);
+  }
+  5.35714% {
+    transform: translate(5px, 0);
+  }
+  7.14286% {
+    transform: translate(0, 0);
+  }
+  8.92857% {
+    transform: translate(5px, 0);
+  }
+  10.71429% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>

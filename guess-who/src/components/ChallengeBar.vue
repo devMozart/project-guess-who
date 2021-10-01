@@ -86,7 +86,8 @@ export default {
   text-transform: uppercase;
   font-size: 10px;
   font-weight: 600;
-  color: var(--highlight-green);
+  color: var(--blue-grey);
+  margin-bottom: 2px;
 }
 
 .challenge-bar__text span {

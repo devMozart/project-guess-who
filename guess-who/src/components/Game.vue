@@ -1,29 +1,38 @@
 <template>
   <div v-if="randomCharacter" class="game-container">
-    <ChallengeBar :rank="rank" />
-    <ChampionImage
-      :rank="rank"
-      :imgSrc="randomCharacter.img"
-      :correct="correct"
-    />
-    <div class="heading">{{ heading }}</div>
-    <div class="guessbox">
-      <input type="text" v-model="champion" list="champions" />
-      <datalist id="champions">
-        <option v-for="(champion, index) in champions" :key="index">{{
-          champion.name
-        }}</option>
-      </datalist>
-      <Button @click="onGuess">Guess!</Button>
+    <div class="game-container__content">
+      <ChallengeBar :rank="rank" />
+      <ImageContainer
+        :correct="correct"
+        :rank="rank"
+        :imgSrc="randomCharacter.img"
+      />
+      <h1 :class="{ 'shake-animation': guessWasWrong }">
+        {{ heading }}
+      </h1>
+      <div class="guessbox">
+        <input
+          type="text"
+          v-model="champion"
+          list="champions"
+          placeholder="Enter a champion"
+        />
+        <datalist id="champions">
+          <option v-for="(champion, index) in champions" :key="index">{{
+            champion.name
+          }}</option>
+        </datalist>
+        <Button @click="onGuess">Guess!</Button>
+      </div>
+      <HelpBox
+        :secretCharacter="randomCharacter"
+        :correct="correct"
+        @onMakeItEasier="changeRank"
+        @onNewChampion="newChampion"
+      />
     </div>
-    <HelpBox
-      :secretCharacter="randomCharacter"
-      :correct="correct"
-      @onMakeItEasier="changeRank"
-    />
-    <Button style="margin-top: 12px;" @click="newChampion">
-      Try another champion
-    </Button>
+    <div />
+    <Footer />
   </div>
 </template>
 
@@ -31,38 +40,33 @@
 import { characters } from "../data/characters";
 
 import ChallengeBar from "./ChallengeBar.vue";
-import ChampionImage from "./ChampionImage.vue";
+import ImageContainer from "./ImageContainer.vue";
 import Button from "./Button.vue";
 import HelpBox from "./HelpBox.vue";
+import Footer from "./Footer.vue";
 
 export default {
   name: "Game",
-  components: { ChallengeBar, ChampionImage, Button, HelpBox },
+  components: { ChallengeBar, ImageContainer, Button, HelpBox, Footer },
   data() {
     return {
       randomCharacter: undefined,
-      img: new Image(),
       rank: "challenger",
       champion: "",
       champions: characters,
       correct: false,
       lastGuess: "",
+      guessWasWrong: false,
     };
   },
   computed: {
-    name() {
-      return this.randomCharacter.name;
-    },
-    image() {
-      return require(`../assets/characters/${this.randomCharacter.img}`);
-    },
     heading() {
       if (this.lastGuess === "") {
         return "Who hides among the pixels?";
       }
 
       if (this.correct) {
-        return `You got it! 🥳 The hidden champion is ${this.randomCharacter.name}`;
+        return `You got it! The hidden champion is ${this.randomCharacter.name}`;
       } else {
         return `Nope, it's not ${this.lastGuess}!`;
       }
@@ -106,6 +110,8 @@ export default {
         this.correct = true;
       } else {
         this.correct = false;
+        this.guessWasWrong = true;
+        setTimeout(() => (this.guessWasWrong = false), 1000);
       }
 
       this.lastGuess = this.champion;
@@ -117,29 +123,39 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .game-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   padding: 12px 24px;
   max-width: 414px;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   background-color: var(--dark);
 }
 
-.heading {
-  color: var(--blue-grey);
-  font-weight: 600;
-  text-align: left;
-  margin: 12px 0px;
-}
 .guessbox {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 24px;
+  column-gap: 12px;
   margin-bottom: 12px;
 }
+
 .guessbox input {
+  width: 100%;
   margin: 1px;
-  padding: 0;
+  padding: 0 10px;
   border: 0;
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+}
+
+.shake-animation {
+  animation: shake 5s ease;
+}
+
+@media (max-width: 400px) {
+  .game-container {
+    padding: 6px 6px;
+    overflow: auto;
+  }
 }
 </style>
