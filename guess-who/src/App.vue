@@ -66,7 +66,7 @@ h1 {
   body {
     background-color: var(--dark-grey);
     background: linear-gradient(rgba(37, 59, 129, 0.5), rgba(37, 59, 129, 0.5)),
-      url("./assets/background/background.png") no-repeat center center fixed;
+      url("./assets/background/background-web.png") no-repeat center center fixed;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
