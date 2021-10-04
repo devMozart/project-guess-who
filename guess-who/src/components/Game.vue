@@ -40,6 +40,7 @@
 
 <script>
 import { characters } from "../data/characters";
+import { getSuccessMsg, getWrongMsg } from "../data/textGenerator";
 
 import ChallengeBar from "./ChallengeBar.vue";
 import ImageContainer from "./ImageContainer.vue";
@@ -68,9 +69,9 @@ export default {
       }
 
       if (this.correct) {
-        return `You got it! The hidden champion is ${this.randomCharacter.name}`;
+        return getSuccessMsg(this.randomCharacter.name);
       } else {
-        return `Nope, it's not ${this.lastGuess}!`;
+        return getWrongMsg(this.lastGuess);
       }
     },
   },

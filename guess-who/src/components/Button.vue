@@ -1,10 +1,15 @@
 <template>
-  <div class="button"><slot></slot></div>
+  <div ref="button" @keyup.enter="triggerClick" class="button"><slot></slot></div>
 </template>
 
 <script>
 export default {
   name: "Button",
+  methods: {
+    triggerClick() {
+      this.$refs.button.click();
+    }
+  }
 };
 </script>
 

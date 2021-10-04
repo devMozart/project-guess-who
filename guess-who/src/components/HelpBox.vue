@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { getHairClue, getRoleClue, getHomelandClue } from "../data/textGenerator";
 import Button from "./Button.vue";
 
 export default {
@@ -43,9 +44,6 @@ export default {
     },
   },
   methods: {
-    toCapitalLetter(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    },
     onMakeItEasier() {
       this.$emit("onMakeItEasier");
     },
@@ -87,7 +85,7 @@ export default {
             return;
           }
           clue = {
-            text: `Whoever is hiding has ${this.secretCharacter.hair} hair.`,
+            text: getHairClue(this.secretCharacter.hair),
             category: "hair",
           };
           break;
@@ -101,9 +99,7 @@ export default {
             return;
           }
           clue = {
-            text: `We've traced the character to ${this.toCapitalLetter(
-              this.secretCharacter.homeRegion
-            )}.`,
+            text: getHomelandClue(this.secretCharacter.homeRegion),
             category: "homeregion",
           };
           break;
@@ -116,9 +112,7 @@ export default {
             return;
           }
           clue = {
-            text: `${this.toCapitalLetter(
-              this.secretCharacter.mainRole
-            )} is what this character is listed as.`,
+            text: getRoleClue(this.secretCharacter.mainRole),
             category: "mainrole",
           };
           break;
