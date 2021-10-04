@@ -17,13 +17,14 @@
           v-model="champion"
           list="champions"
           placeholder="Enter a champion"
+          tabindex="1"
         />
         <datalist id="champions">
           <option v-for="(champion, index) in champions" :key="index">{{
             champion.name
           }}</option>
         </datalist>
-        <Button @click="onGuess">Guess!</Button>
+        <Button tabindex="2" @click="onGuess">Guess!</Button>
       </div>
       <HelpBox
         :secretCharacter="randomCharacter"

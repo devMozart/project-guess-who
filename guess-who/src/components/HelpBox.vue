@@ -2,10 +2,10 @@
   <div class="helpbox">
     <div class="helpbox__buttons">
       <div class="helpbox__buttons__row">
-        <Button @click="onGiveClue">Give me a clue</Button>
-        <Button @click="onMakeItEasier">Make it easier</Button>
+        <Button tabindex="3" @click="onGiveClue">Give me a clue</Button>
+        <Button tabindex="4" @click="onMakeItEasier">Make it easier</Button>
       </div>
-      <Button @click="$emit('onNewChampion')">
+      <Button tabindex="5" @click="$emit('onNewChampion')">
         Try another champion
       </Button>
     </div>
