@@ -10,14 +10,17 @@
         <img
           :style="getOpacity('bronze')"
           src="../assets/ranks/rank_bronze.png"
+          alt="Bronze rank"
         />
         <img
           :style="getOpacity('diamond')"
           src="../assets/ranks/rank_diamond.png"
+          alt="Diamond rank"
         />
         <img
           :style="getOpacity('challenger')"
           src="../assets/ranks/rank_challenger.png"
+          alt="Challenger rank"
         />
       </div>
       <div

@@ -1,6 +1,6 @@
 <template>
   <div v-if="randomCharacter" class="game-container">
-    <div class="game-container__content">
+    <main class="game-container__content">
       <ChallengeBar :rank="rank" />
       <ImageContainer
         :correct="correct"
@@ -13,6 +13,7 @@
       <div class="guessbox">
         <input
           type="text"
+          title="Champion name"
           v-model="champion"
           list="champions"
           placeholder="Enter a champion"
@@ -30,7 +31,7 @@
         @onMakeItEasier="changeRank"
         @onNewChampion="newChampion"
       />
-    </div>
+    </main>
     <div />
     <Footer />
   </div>

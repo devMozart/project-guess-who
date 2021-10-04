@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <footer class="footer">
     <span
       >Made by
       <a
@@ -18,7 +18,7 @@
         >Riot Games Inc</a
       ></span
     >
-  </div>
+  </footer>
 </template>
 
 <script>
